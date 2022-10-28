@@ -213,12 +213,12 @@ LOGGING = {
 
         },
 
-        'file': {'class': 'logging.FileHandler',  # 记录到文件
-                 'level': 'INFO',  # 处理的日志级别
-                 'formatter': 'base',
-                 'filename': os.path.join(f'{BASE_DIR}', 'logs', 'commom.log'),
-                 'encoding': 'utf-8'  # 文件s编码格式
-                 },
+        # 'file': {'class': 'logging.FileHandler',  # 记录到文件
+        #          'level': 'INFO',  # 处理的日志级别
+        #          'formatter': 'base',
+        #          'filename': os.path.join(f'{BASE_DIR}', 'logs', 'commom.log'),
+        #          'encoding': 'utf-8'  # 文件s编码格式
+        #          },
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -236,13 +236,13 @@ LOGGING = {
     # 日志记录器
     'loggers': {
         'django.server': {
-            'handlers': ['file','default','inf-out'],
+            'handlers': ['default','inf-out'],
             'level': 'DEBUG',  #开发测试,所有日志都应该显示
             'propagate': False
 
         },  # django.server 应该是控制台输出的默认日志logger;这里把其 记录级别调高之后,系统自带日志就不会出现在控制台了
         'my_logger': {
-            'handlers': ['inf-out', 'file', 'default'],
+            'handlers': ['inf-out', 'default'],
             'level': 'DEBUG',
             'propagate': False
 
