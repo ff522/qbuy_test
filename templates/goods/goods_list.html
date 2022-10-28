@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{%block title%}活动页面{% endblock %}
+{% block css %}
+
+.price{text-decoration:line-through;
+color:lightgray
+
+
+}
+.vip_price{
+color:blue
+
+}
+
+
+{% endblock %}
+{% block content %}
+{% if active %}
+
+<h3>{{active.title}}</h3>
+<p>
+   <img src="/media/{{active.img1}}"  height="300px" width="400px">
+
+</p>
+{% else %}
+<h3>无此活动,或者活动已结束</h3>
+
+{% endif %}
+<table border="1" cellpadding="2"  cellspacing="0" width="100%">
+   <thead>
+
+    <th>活动商品名称</th>
+   <th>活动商品图片</th>
+    <th>原价</th>
+    <th>折后价格</th>
+  <th></th>
+
+
+   </thead>
+    <tbody>
+{%  for data in active.actives.all  %}
+ <tr>
+     <td><a href="/good/info/{{data.goods.id}}"     >{{data.goods.name}}</a></td>
+     <td> <img src="/media/{{data.goods.img1}}" width="100px"  height="100px"></td>
+
+     <td> <span class="price">{{data.goods.price}}</span></td>
+     <td> <span class="vip_price">{{ data.rate_price }}</span></td>
+
+     <td>
+        {% if qbuy_good %}
+         {%  if data.goods.id  == qbuy_good %}
+          <button class='btn btn-info' onclick="qbuy_pay('{{data.goods.id}}')" >去付款</button>
+         {% else %}
+         <button class='btn btn-danger' disabled="disabled" >无法抢购</button>
+         {% endif %}
+         {% else %}
+         <button class='btn btn-danger'  onclick="qbuy(this,'{{data.goods.id}}')">抢购</button>
+         {% endif %}
+     </td>
+
+
+
+
+    </tr>
+    {% empty %}
+
+<tr>
+    <td colspan="4">查无数据</td>
+
+</tr>
+    {% endfor %}
+
+    </tbody>
+
+
+</table>
+
+
+
+
+{% endblock %}
+
+
+{% block js  %}
+
+var cId=0
+
+function qbuy_pay(goods_id) {open('/good/info/'+goods_id,target='_self')}
+
+function qbuy(btn,goods_id){
+    fetch('/active/qbuy_api/'+goods_id)
+    .then(resp=>resp.json())
+    .then(data=>{
+if (data.code==100){if(confirm('当前用户未登录,是否跳转登录页面'))
+{open('/user/login',target='_self')}
+return
+}
+
+
+$(btn).text(data.msg);
+if(data.code==201){
+$(btn).removeAttr("onclick");
+$(btn).click(function(){alert('正在抢购中,请稍等')});
+cId =  setInterval(function(){
+fetch('/active/query_qbuy_api/'+goods_id)
+ .then(resp=>resp.json())
+    .then(data=>{
+    if(data.code != 201){clearInterval(cId)};
+ if(data.code == 200){$(btn).text('去付款');
+$(btn).attr("class","btn-info");
+
+$(btn).click(function(){qbuy_pay(goods_id)})
+
+}
+else if(data.code == 201){$(btn).text(data.msg); $(btn).click(function(){alert('正在抢购中,请稍等')})}
+
+
+else {$(btn).text(data.msg);
+$(btn).attr("disabled","disabled")
+}
+
+})
+},1000);
+
+}
+
+
+
+}
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {%  endblock %}

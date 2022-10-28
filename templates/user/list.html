@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{%block title%}用户信息{% endblock %}
+
+
+{% block content %}
+
+<p>用户昵称:{{request.session.login_user.name}}</p>
+
+<p>用户手机号:{{request.session.login_user.phone}}</p>
+
+
+
+
+{% endblock %}
+
+

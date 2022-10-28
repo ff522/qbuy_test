@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{%block title%}用户注册{% endblock %}
+
+
+{% block content %}
+
+	<div style=" display: flex; /*所有子元素block或inline都变成行内块元素的样式*/
+     align-items: center;         /*子元素中线居中*/
+     ">
+
+		手机号:<input name="phone" id='phone' placeholder="请输入手机号码" required >
+		昵称:<input name="nicky_name" id='nicky_name' placeholder="请输入昵称"  required>
+
+		<img src="{%url 'user:img_code' %}" onclick="this.src='{%url 'user:img_code' %}?t='+new Date()*1"></div><br>
+<!--		t='+new Date()*1 作用是是每次请次请求路径不同-->
+
+
+		验证:<input name="phone" id='valid_code' placeholder="请输入图形验证码">
+
+
+		<button onclick="get_code()">获取手机验证码</button><br>
+		验证码:<input name="code" id="code"><br>
+
+
+		<button onclick="login()">注册</button><a href="/user/login/">登录</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+		{% block js %}
+			function get_code() {
+
+				valid_code=document.getElementById('valid_code').value
+				console.log(valid_code)
+
+				if (valid_code =='' ){
+				alert('图形验证码未填写')
+				}else{
+
+
+				data = {
+
+
+					phone: document.getElementById('phone').value,
+					valid_code:valid_code
+
+				};
+
+
+				fetch('/user/code', {
+
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/json',
+						"X-CSRFToken": '{{ csrf_token }}'
+					},
+					body: JSON.stringify(data)
+
+
+				}).then(response => response.text()).then(text => {
+
+					alert(text)
+				})
+
+
+}
+			}
+
+
+			function login() {
+
+				nicky_name= document.getElementById('nicky_name').value
+				if (nicky_name =='' ){
+				alert('昵称未填写')
+				}else{
+				data = {
+
+
+					phone: document.getElementById('phone').value,
+					code: document.getElementById('code').value,
+					nicky_name: nicky_name
+
+
+				};
+				console.log(data)
+
+				fetch('', {
+
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/json',
+						"X-CSRFToken": '{{ csrf_token }}'
+					},
+					body: JSON.stringify(data)
+
+
+				}).then(response => response.text()).then(text => {
+
+					if (text.includes('失败')) {
+						alert(text)
+					} else {
+						document.write(text)
+					}
+				})
+
+
+
+
+			}}
+	{% endblock %}
+
+
+	</body>
+</html>

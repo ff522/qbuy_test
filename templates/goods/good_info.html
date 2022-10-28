@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{%block title%}商品信息页面{% endblock %}
+{% block css %}
+
+.price_{text-decoration:line-through;
+color:lightgray
+
+
+}
+.vip_price{
+color:blue
+
+}
+
+
+{% endblock %}
+{% block content %}
+
+
+<table border="1" cellpadding="2"  cellspacing="0" width="100%">
+   <thead>
+
+    <th>商品名称</th>
+   <th>活动商品图片</th>
+    <th>原价</th>
+
+
+
+
+   </thead>
+    <tbody>
+
+ <tr>
+     <td>{{good.name}}</td>
+     <td> <img src="/media/{{good.img1}}" width="100px"  height="100px"></td>
+
+     <td> <span class="price">{{good.price}}</span></td>
+
+
+    </tr>
+
+
+
+
+    </tbody>
+
+
+</table>
+
+
+
+
+{% endblock %}
