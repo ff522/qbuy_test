@@ -1,4 +1,4 @@
-from ubuntu-dev:latest
+from kuralabs/python3-dev:latest
 MAINTAINER ff520 ff@ff520.win
 WORKDIR /usr/src
 RUN apt update
