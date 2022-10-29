@@ -5494,3 +5494,9 @@
 [Log_Time: "2022年10月26日 14时45分55秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /user/user_api2 HTTP/1.1" 401 5127,log_leverl:WARNING
 [Log_Time: "2022年10月26日 16时47分20秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"POST /user/user_api_login HTTP/1.1" 200 110,log_leverl:INFO
 [Log_Time: "2022年10月26日 16时47分20秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /user/user_api2 HTTP/1.1" 200 666,log_leverl:INFO
+[Log_Time: "2022年10月29日 12时48分47秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /active/info/1 HTTP/1.1" 500 82960,log_leverl:ERROR
+[Log_Time: "2022年10月29日 12时48分48秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /favicon.ico HTTP/1.1" 404 2767,log_leverl:WARNING
+[Log_Time: "2022年10月29日 12时48分56秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /user HTTP/1.1" 404 2746,log_leverl:WARNING
+[Log_Time: "2022年10月29日 12时49分00秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /static HTTP/1.1" 404 2752,log_leverl:WARNING
+[Log_Time: "2022年10月29日 12时50分30秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /static/good/1.png HTTP/1.1" 404 1789,log_leverl:WARNING
+[Log_Time: "2022年10月29日 12时50分50秒 ,Log_Name: django.server],modules:basehttp,function:log_message,Log_Message:"GET /static/goods/1.png HTTP/1.1" 200 8218873,log_leverl:INFO
